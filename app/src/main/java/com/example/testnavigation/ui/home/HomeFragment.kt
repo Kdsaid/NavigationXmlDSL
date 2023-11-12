@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.testnavigation.databinding.FragmentHomeBinding
-import com.example.testnavigation.router.Routes
+import com.example.testnavigation.router.Destination
+import com.example.testnavigation.router.navigateTo
 
 class HomeFragment : Fragment() {
 
@@ -42,12 +43,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
-            navigateToPlant("khaled hammad")
+            navigateToPlant(name = "khaled hammad", last = "said")
         }
     }
-    private fun navigateToPlant(name: String) {
-        findNavController().navigate("${Routes.NavigationDetails}/$name")
+
+    private fun navigateToPlant(name: String, last: String) {
+        findNavController().navigateTo(Destination.UserDetailsScreen.invoke(name, last))
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -2,46 +2,91 @@ package com.example.testnavigation.router
 
 import android.content.Context
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.NavType
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.fragment
 import com.example.testnavigation.R
-import com.example.testnavigation.router.Routes.NavigationDetails.ARG_Details_NAME
+import com.example.testnavigation.router.Destination.Companion.FIST_NAME_KEY
+import com.example.testnavigation.router.Destination.Companion.LAST_NAME_KEY
 import com.example.testnavigation.ui.dashboard.DashboardFragment
 import com.example.testnavigation.ui.details.DetailsFragment
 import com.example.testnavigation.ui.home.HomeFragment
 import com.example.testnavigation.ui.notifications.NotificationsFragment
 
-sealed class Routes(val route: String) {
-    object NavigationHome : Routes("navigation_home")
-    object NavigationDashboard : Routes("navigation_dashboard")
-    object NavigationNotifications : Routes("navigation_notifications")
-    object NavigationDetails : Routes("navigation_Details"){
-        const val ARG_Details_NAME = "ARG_Details_NAME"
 
+sealed class Destination(protected val route: String, vararg params: String) {
+    val fullRoute: String = if (params.isEmpty()) route else {
+        val builder = StringBuilder(route)
+        params.forEach { builder.append("/{${it}}") }
+        builder.toString()
     }
 
+    sealed class NoArgumentsDestination(route: String) : Destination(route) {
+        operator fun invoke(): String = route
+    }
+
+    data object HomeScreen : NoArgumentsDestination(HOME_ROUTE)
+
+    data object DashboardScreen : NoArgumentsDestination(DASHBOARD_ROUTE)
+
+    data object NotificationsScreen : NoArgumentsDestination(NOTIFICATIONS_ROUTE)
+
+
+    data object UserDetailsScreen : Destination(DETAIL_ROUTE, FIST_NAME_KEY, LAST_NAME_KEY){
+        operator fun invoke(fistName: String, lastName: String): String = route.appendParams(
+            FIST_NAME_KEY to fistName,
+            LAST_NAME_KEY to lastName
+        )
+    }
+
+    companion object {
+        private const val HOME_ROUTE = "home"
+        private const val DASHBOARD_ROUTE = "dashboard"
+        private const val NOTIFICATIONS_ROUTE = "notifications"
+        private const val DETAIL_ROUTE = "details_details"
+        const val FIST_NAME_KEY = "firstName"
+        const val LAST_NAME_KEY = "lastName"
+    }
 }
 
+
+internal fun String.appendParams(vararg params: Pair<String, Any?>): String {
+    val builder = StringBuilder(this)
+
+    params.forEach {
+        it.second?.toString()?.let { arg ->
+            builder.append("/$arg")
+        }
+    }
+
+    return builder.toString()
+}
+
+
 fun NavController.setupGraph(context: Context) = createGraph(
-    startDestination = Routes.NavigationHome.route
+    startDestination = Destination.HomeScreen.fullRoute
 ) {
-    fragment<HomeFragment>(Routes.NavigationHome.route) {
+    fragment<HomeFragment>(Destination.HomeScreen.fullRoute) {
         label = context.getStringResource(R.string.title_home)
     }
-    fragment<DashboardFragment>(Routes.NavigationDashboard.route) {
+    fragment<DashboardFragment>(Destination.DashboardScreen.fullRoute) {
         label = context.getStringResource(R.string.title_dashboard)
     }
-    fragment<NotificationsFragment>(Routes.NavigationNotifications.route) {
+    fragment<NotificationsFragment>(Destination.NotificationsScreen.fullRoute) {
         label = context.getStringResource(R.string.title_notifications)
     }
-    fragment<DetailsFragment>("${Routes.NavigationDetails}/{$ARG_Details_NAME}") {
+    fragment<DetailsFragment>(Destination.UserDetailsScreen.fullRoute) {
         label = context.getStringResource(R.string.title_details)
-        argument(ARG_Details_NAME) {
+
+        argument(FIST_NAME_KEY) {
             type = NavType.StringType
-            defaultValue = "ARG_Details_NAME"
+            defaultValue = "fisrt"
         }
+        argument(LAST_NAME_KEY) {
+            type = NavType.StringType
+            defaultValue = "fisrt"
+        }
+
     }
 }
 

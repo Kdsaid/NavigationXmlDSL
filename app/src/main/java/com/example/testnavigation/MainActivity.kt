@@ -1,15 +1,17 @@
 package com.example.testnavigation
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.example.testnavigation.databinding.ActivityMainBinding
-import com.example.testnavigation.router.Routes
+import com.example.testnavigation.router.Destination
 import com.example.testnavigation.router.setupGraph
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
                 "Activity ${this@MainActivity} does not have an ActionBar set via setSupportActionBar()"
             }
             actionBar.title = destination.label
+
         }
         navView.setupWithNavControllerCustom(navController)
 
@@ -52,18 +55,18 @@ class MainActivity : AppCompatActivity() {
         setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    navController.navigate(Routes.NavigationHome.route, options)
+                    navController.navigate(Destination.HomeScreen.fullRoute, options)
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.navigation_dashboard -> {
-                    navController.navigate(Routes.NavigationDashboard.route, options)
+                    navController.navigate(Destination.DashboardScreen.fullRoute, options)
 
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.navigation_notifications -> {
-                    navController.navigate(Routes.NavigationNotifications.route, options)
+                    navController.navigate(Destination.NotificationsScreen.fullRoute, options)
 
                     return@setOnItemSelectedListener true
                 }
@@ -71,6 +74,4 @@ class MainActivity : AppCompatActivity() {
             false
         }
     }
-
-
 }
