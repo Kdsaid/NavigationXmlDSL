@@ -38,6 +38,16 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.button.setOnClickListener {
+            navigateToPlant("khaled hammad")
+        }
+    }
+    private fun navigateToPlant(name: String) {
+        findNavController().navigate("${Routes.NavigationDetails}/$name")
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
