@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-
 import com.example.testnavigation.databinding.FragmentNotificationsBinding
-import com.example.testnavigation.router.Destination
+import com.example.testnavigation.router.Destination.UserDetailsScreen.Companion.FIST_NAME_KEY
+import com.example.testnavigation.router.Destination.UserDetailsScreen.Companion.LAST_NAME_KEY
 
 class DetailsFragment : Fragment() {
 
@@ -28,9 +28,10 @@ class DetailsFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        val name: String? = arguments?.getString(Destination.FIST_NAME_KEY)
-        val last: String? = arguments?.getString(Destination.LAST_NAME_KEY)
-        textView.text = StringBuilder().append( name).append("  ").append("family").append("  ").append(last)
+        val name: String? = arguments?.getString(FIST_NAME_KEY)
+        val last: String? = arguments?.getString(LAST_NAME_KEY)
+        textView.text =
+            StringBuilder().append(name).append("  ").append("family").append("  ").append(last)
         return root
     }
 

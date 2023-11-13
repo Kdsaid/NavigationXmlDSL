@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToPlant(name: String, last: String) {
-        findNavController().navigateTo(Destination.UserDetailsScreen.invoke(name, last))
+        findNavController().navigateTo(Destination.UserDetailsScreen().invoke(name, last))
     }
 
     override fun onDestroyView() {

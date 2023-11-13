@@ -6,8 +6,8 @@ import androidx.navigation.NavType
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.fragment
 import com.example.testnavigation.R
-import com.example.testnavigation.router.Destination.Companion.FIST_NAME_KEY
-import com.example.testnavigation.router.Destination.Companion.LAST_NAME_KEY
+import com.example.testnavigation.router.Destination.UserDetailsScreen.Companion.FIST_NAME_KEY
+import com.example.testnavigation.router.Destination.UserDetailsScreen.Companion.LAST_NAME_KEY
 import com.example.testnavigation.ui.dashboard.DashboardFragment
 import com.example.testnavigation.ui.details.DetailsFragment
 import com.example.testnavigation.ui.home.HomeFragment
@@ -32,11 +32,17 @@ sealed class Destination(protected val route: String, vararg params: String) {
     data object NotificationsScreen : NoArgumentsDestination(NOTIFICATIONS_ROUTE)
 
 
-    data object UserDetailsScreen : Destination(DETAIL_ROUTE, FIST_NAME_KEY, LAST_NAME_KEY){
+    class UserDetailsScreen : Destination(DETAIL_ROUTE, FIST_NAME_KEY, LAST_NAME_KEY) {
         operator fun invoke(fistName: String, lastName: String): String = route.appendParams(
             FIST_NAME_KEY to fistName,
             LAST_NAME_KEY to lastName
         )
+
+        companion object {
+            const val FIST_NAME_KEY = "firstName"
+            const val LAST_NAME_KEY = "lastName"
+        }
+
     }
 
     companion object {
@@ -44,8 +50,6 @@ sealed class Destination(protected val route: String, vararg params: String) {
         private const val DASHBOARD_ROUTE = "dashboard"
         private const val NOTIFICATIONS_ROUTE = "notifications"
         private const val DETAIL_ROUTE = "details_details"
-        const val FIST_NAME_KEY = "firstName"
-        const val LAST_NAME_KEY = "lastName"
     }
 }
 
@@ -75,7 +79,7 @@ fun NavController.setupGraph(context: Context) = createGraph(
     fragment<NotificationsFragment>(Destination.NotificationsScreen.fullRoute) {
         label = context.getStringResource(R.string.title_notifications)
     }
-    fragment<DetailsFragment>(Destination.UserDetailsScreen.fullRoute) {
+    fragment<DetailsFragment>(Destination.UserDetailsScreen().fullRoute) {
         label = context.getStringResource(R.string.title_details)
 
         argument(FIST_NAME_KEY) {
