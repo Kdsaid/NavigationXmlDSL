@@ -29,4 +29,5 @@ implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
 ## Additional Resources
 
-For more details and practical examples, consult the [official documentation](https://developer.android.com/guide/navigation/design/kotlin-dsl).
+For more details and practical examples, consult the [official documentation]
+(https://developer.android.com/guide/navigation/design/kotlin-dsl).
