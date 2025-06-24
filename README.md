@@ -1,4 +1,3 @@
-
 # Jetpack Compose and XML-Based Navigation in Android
 
 This project demonstrates how to manage **navigation** in an Android app using both **Jetpack Compose** with **Kotlin DSL** and **XML-based navigation**. This guide explains how to handle navigation using both approaches, making it easier to integrate them in a single project, and provides flexible navigation management.
@@ -51,7 +50,8 @@ fun SetupNavGraph(navController: NavHostController) {
                     type = NavType.StringType
                     defaultValue = "Doe"
                 }
-            )
+            ),
+            deepLinks = listOf(NavDeepLink(uriPattern = "myapp://user/{firstName}/{lastName}"))
         ) { backStackEntry ->
             // Pass arguments to DetailsScreen
             DetailsScreen(backStackEntry)
@@ -123,8 +123,6 @@ In your `res/navigation` folder, create an XML file (e.g., `nav_graph.xml`) to d
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
-
-
 </navigation>
 ```
 
@@ -248,5 +246,3 @@ This project demonstrates how to set up both **Jetpack Compose** navigation with
 ### License
 
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
-
-
