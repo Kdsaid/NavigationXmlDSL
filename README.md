@@ -249,6 +249,4 @@ This project demonstrates how to set up both **Jetpack Compose** navigation with
 
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
----
 
-Feel free to adapt this **README.md** to your specific use case. If you need further clarifications or changes, let me know!
