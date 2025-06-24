@@ -8,7 +8,6 @@ This project demonstrates how to manage **navigation** in an Android app using b
 * **XML-based Navigation**: A traditional approach where navigation is defined in XML files and parsed at build time.
 * **Modular Architecture**: Communication between feature modules and core modules via shared `NavController`.
 * **Argument Handling**: Passing arguments between composables in Jetpack Compose or fragments in XML-based navigation.
-* **Deep Link Handling**: Both approaches support handling deep links for navigating to specific screens via URLs.
 
 ---
 
@@ -17,9 +16,8 @@ This project demonstrates how to manage **navigation** in an Android app using b
 1. [Kotlin DSL Navigation](#kotlin-dsl-navigation)
 2. [XML-based Navigation](#xml-based-navigation)
 3. [Modular Architecture and Navigation Communication](#modular-architecture-and-navigation-communication)
-4. [Deep Link Handling](#deep-link-handling)
-5. [Dependencies](#dependencies)
-6. [Setup Instructions](#setup-instructions)
+4. [Dependencies](#dependencies)
+5. [Setup Instructions](#setup-instructions)
 
 ---
 
@@ -50,8 +48,7 @@ fun SetupNavGraph(navController: NavHostController) {
                     type = NavType.StringType
                     defaultValue = "Doe"
                 }
-            ),
-            deepLinks = listOf(NavDeepLink(uriPattern = "myapp://user/{firstName}/{lastName}"))
+            )
         ) { backStackEntry ->
             // Pass arguments to DetailsScreen
             DetailsScreen(backStackEntry)
@@ -180,35 +177,6 @@ By defining shared **routes** and **navigation logic** in the Core module, Featu
 
 ---
 
-## Deep Link Handling
-
-Both **Jetpack Compose navigation** and **XML-based navigation** support deep links. Here’s an example of defining a deep link in your navigation graph:
-
-### For **Jetpack Compose**:
-
-```kotlin
-composable(
-    route = "details/{firstName}/{lastName}",
-    deepLinks = listOf(NavDeepLink(uriPattern = "myapp://user/{firstName}/{lastName}"))
-) { backStackEntry ->
-    val firstName = backStackEntry.arguments?.getString("firstName") ?: "Unknown"
-    val lastName = backStackEntry.arguments?.getString("lastName") ?: "Unknown"
-    DetailsScreen(firstName, lastName)
-}
-```
-
-### For **XML-based navigation**:
-
-```xml
-<fragment
-    android:id="@+id/detailsFragment"
-    android:name="com.example.testnavigation.xml.ui.details.DetailsFragment"
-    android:label="Details"
-    app:deepLink="myapp://user/{firstName}/{lastName}" />
-```
-
----
-
 ## Dependencies
 
 Ensure your project includes the required dependencies for **Jetpack Compose** and **Navigation**:
@@ -246,3 +214,4 @@ This project demonstrates how to set up both **Jetpack Compose** navigation with
 ### License
 
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+
