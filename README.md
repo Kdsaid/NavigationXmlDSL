@@ -226,7 +226,7 @@ implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Kdsaid/NavigationXmlDSL.git
+   git clone https://github.com/Kdsaid/NavigationComposeXmlDSL
    ```
 
 2. Open the project in **Android Studio**.
