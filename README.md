@@ -124,26 +124,6 @@ In your `res/navigation` folder, create an XML file (e.g., `nav_graph.xml`) to d
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.testnavigation.xml.ui.home.HomeFragment"
-        android:label="Home"
-        android:argument="@id/itemId"
-        android:defaultValue="default_value" />
-    
-    <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.example.testnavigation.xml.ui.details.DetailsFragment"
-        android:label="Details">
-        <argument
-            android:name="firstName"
-            app:argType="string"
-            android:defaultValue="John" />
-        <argument
-            android:name="lastName"
-            app:argType="string"
-            android:defaultValue="Doe" />
-    </fragment>
 
 </navigation>
 ```
