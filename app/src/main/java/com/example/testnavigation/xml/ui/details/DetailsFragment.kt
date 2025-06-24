@@ -1,4 +1,4 @@
-package com.example.testnavigation.ui.notifications
+package com.example.testnavigation.xml.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.testnavigation.databinding.FragmentNotificationsBinding
+import com.example.testnavigation.routerxml.Destination.UserDetailsScreen.Companion.FIST_NAME_KEY
+import com.example.testnavigation.routerxml.Destination.UserDetailsScreen.Companion.LAST_NAME_KEY
 
-class NotificationsFragment : Fragment() {
+class DetailsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
 
@@ -22,16 +23,15 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val name: String? = arguments?.getString(FIST_NAME_KEY)
+        val last: String? = arguments?.getString(LAST_NAME_KEY)
+        textView.text =
+            StringBuilder().append(name).append("  ").append("family").append("  ").append(last)
         return root
     }
 

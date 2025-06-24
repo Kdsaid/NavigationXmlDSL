@@ -1,4 +1,4 @@
-package com.example.testnavigation.ui.home
+package com.example.testnavigation.xml.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.testnavigation.databinding.FragmentHomeBinding
-import com.example.testnavigation.router.Destination
-import com.example.testnavigation.router.navigateTo
+import com.example.testnavigation.routerxml.Destination
+import com.example.testnavigation.routerxml.navigateTo
 
 class HomeFragment : Fragment() {
 

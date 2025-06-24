@@ -1,4 +1,4 @@
-package com.example.testnavigation.router
+package com.example.testnavigation.routerxml
 
 import android.content.Context
 import androidx.navigation.NavController
@@ -6,12 +6,12 @@ import androidx.navigation.NavType
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.fragment
 import com.example.testnavigation.R
-import com.example.testnavigation.router.Destination.UserDetailsScreen.Companion.FIST_NAME_KEY
-import com.example.testnavigation.router.Destination.UserDetailsScreen.Companion.LAST_NAME_KEY
-import com.example.testnavigation.ui.dashboard.DashboardFragment
-import com.example.testnavigation.ui.details.DetailsFragment
-import com.example.testnavigation.ui.home.HomeFragment
-import com.example.testnavigation.ui.notifications.NotificationsFragment
+import com.example.testnavigation.routerxml.Destination.UserDetailsScreen.Companion.FIST_NAME_KEY
+import com.example.testnavigation.routerxml.Destination.UserDetailsScreen.Companion.LAST_NAME_KEY
+import com.example.testnavigation.xml.ui.dashboard.DashboardFragment
+import com.example.testnavigation.xml.ui.details.DetailsFragment
+import com.example.testnavigation.xml.ui.home.HomeFragment
+import com.example.testnavigation.xml.ui.notifications.NotificationsFragment
 
 
 sealed class Destination(protected val route: String, vararg params: String) {
